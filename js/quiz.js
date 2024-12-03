@@ -207,44 +207,42 @@ function downloadCertificate() {
     img.onload = () => {
         doc.addImage(img, 'PNG', 0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height);
 
-        // Set the custom font for the name
         doc.setFont("Allura");
         doc.setFontSize(60);
-        doc.setTextColor(71, 46, 24); // Change the RGB values here for a different color
+        doc.setTextColor(71, 46, 24);
 
         const capitalizedUserName = capitalizeName(userName);
         const nameWidth = doc.getTextWidth(capitalizedUserName);
         const centerX = doc.internal.pageSize.width / 2;
         doc.text(capitalizedUserName, centerX - nameWidth / 2, 100);
 
-        // Set the default font and color for the score
         doc.setFont("helvetica", "normal");
         doc.setFontSize(15);
-        doc.setTextColor(0, 0, 0); // Black color for score
+        doc.setTextColor(0, 0, 0);
 
         const percentage = ((score / totalQuestions) * 100).toFixed(2);
         doc.text(`Score: ${percentage}%`, centerX, 135, { align: "center" });
 
-        // Create a Blob from the PDF and trigger a download
-        const blob = doc.output("blob");
-        const url = URL.createObjectURL(blob);
+        // Generate the PDF as a Blob
+        const pdfBlob = doc.output('blob');
 
-        // Create a temporary anchor link to trigger the download
+        // Create an Object URL for the Blob
         const link = document.createElement('a');
-        link.href = url;
+        link.href = URL.createObjectURL(pdfBlob);
         link.download = 'certificate.pdf';
 
-        // Append the link to the document and trigger a click event to start the download
+        // Append the link to the document and trigger the download
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link); // Clean up the DOM after download
+        document.body.removeChild(link);
 
-        // Revoke the object URL to free up memory
-        URL.revokeObjectURL(url);
+        // Revoke the Object URL to free memory
+        URL.revokeObjectURL(link.href);
     };
 
-    img.src = '../images/certificate_template.png'; // Path to your certificate template image
+    img.src = 'https://twelvesites.github.io/ipc/images/certificate_template.png'; // Path to your certificate template image
 }
+
 // Expose to global scope
 window.downloadCertificate = downloadCertificate;
 // Function to get the device information
