@@ -149,7 +149,7 @@ canvas.addEventListener('click', (e) => {
             germs.splice(i, 1); // Remove germ
             score++;
             updateScore();
-            if (score === 8) { // Player wins when they collect 8 germs
+            if (score === 20) { // Player wins when they collect 8 germs
                 showPopUp('Congratulations! You won the game!', false);
             }
             break;
