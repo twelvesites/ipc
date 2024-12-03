@@ -225,18 +225,22 @@ function downloadCertificate() {
         const percentage = ((score / totalQuestions) * 100).toFixed(2);
         doc.text(`Score: ${percentage}%`, centerX, 135, { align: "center" });
 
-        // Generate the PDF as a Data URI
-        const pdfDataUri = doc.output('datauristring');
+        // Create a Blob from the PDF and trigger a download
+        const blob = doc.output("blob");
+        const url = URL.createObjectURL(blob);
 
         // Create a temporary anchor link to trigger the download
         const link = document.createElement('a');
-        link.href = pdfDataUri;
+        link.href = url;
         link.download = 'certificate.pdf';
 
         // Append the link to the document and trigger a click event to start the download
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);  // Clean up the DOM after download
+        document.body.removeChild(link); // Clean up the DOM after download
+
+        // Revoke the object URL to free up memory
+        URL.revokeObjectURL(url);
     };
 
     img.src = '../images/certificate_template.png'; // Path to your certificate template image
