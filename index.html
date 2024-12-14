@@ -3,55 +3,49 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-      <title>IPW | Prime Medial Center</title>
-      <link rel="stylesheet" href="css/phonestyle.css">
+      <title>Twelve</title>
 </head>
-<body>
-      <header>
-            <nav class="navbar hidden" id="navbar">
-                  <img src="images/logo.png" alt="Twelve">
-                  <div class="menu">
-                        <a href="#home">Home</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#more">More</a>
-                  </div>
-            </nav>
-      </header>
-      
-
-      <section id="intro">
-            <h1>Hey, let's <br/><b>learn something new</b></h1>
-      </section>
-
-
-
-      <center>
-            <section id="content">
-                  <img src="images/illustration/illus (1).png" alt="Illustration" class="ill">
-                  <h1>Infection Prevention Week</h1>
-                  <p class="contentp"><b>Infection prevention and control (IPC)</b> is a practical, evidence-based approach preventing patients and health workers from being harmed by avoidable infections. Effective IPC requires constant action at all levels of the health system, including policymakers, facility managers, health workers and those who access health services. IPC is unique in the field of patient safety and quality of care, as it is universally relevant to every health worker and patient, at every health care interaction. Defective IPC causes harm and can kill. Without effective IPC it is impossible to achieve quality health care delivery.</p>
-                  <h2>Why Is Infection Prevention Important?</h2>
-                  <div id="ipi-1">
-                        <p class="ipip"><b>Protects Patients and Staff:</b> Prevents the spread of infections in hospitals and clinics, safeguarding vulnerable patients and healthcare workers.</p>
-                        <img src="images/illustration/illus (2).png" alt="illus2">
-                  </div>
-                  <div id="ipi-2">
-                        <p class="ipip"><b>Improves Public Health: </b>Effective prevention helps control outbreaks and protects the wider community.</p>
-                        <img src="images/illustration/illus (3).png" alt="illus3">
-                  </div>
-                  <div id="ipi-3">
-                        <p class="ipip"><b>Combats Antibiotic Resistance:</b> Reducing infections lowers the reliance on antibiotics, slowing the emergence of drug-resistant bacteria.</p>
-                        <img src="images/illustration/illus (4).png" alt="illus4">
-                  </div>
-                  <br>
-            </section>
-            <a href="steps-to-prevent-infection.html">
-                  <button>Continue</button>
-            </a>
-      </center>
-</body>
-
+      <style>
+            body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #f0f0f0;
+            }
+    
+            #logo {
+                width: 200px;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+    
+            #logo.visible {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <img id="logo" src="images/logo.png" alt="Logo">
+    
+        <script>
+            const logo = document.getElementById('logo');
+    
+            // Show the logo with fade-in animation
+            setTimeout(() => {
+                logo.classList.add('visible');
+            }, 100); // Delay slightly to ensure CSS applies
+    
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                const screenWidth = window.innerWidth;
+                if (screenWidth <= 768) { // Mobile and tablet
+                    window.location.href = 'description.html';
+                } else { // Laptop
+                    window.location.href = 'desk-description.html';
+                }
+            }, 2000);
+        </script>
+        </body>
 </html>

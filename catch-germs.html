@@ -40,9 +40,11 @@
 <body>
     <header>
         <nav class="navbar hidden" id="navbar">
-              <img src="images/logo.png" alt="Twelve">
-              <div class="menu">
-                    <a href="#home">Home</a>
+               <a href="index.html">
+                        <img src="images/logo.png" alt="Twelve">
+                  </a>
+                  <div class="menu">
+                        <a href="description.html">Home</a>
                     <a href="#contact">Contact</a>
                     <a href="#more">More</a>
               </div>
@@ -62,7 +64,7 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <h1>CATCH ALL GERMS!</h1>
-            <p>Collect 20 germs.</p>
+            <p>Collect 10 germs.</p>
             <button id="continueButton">Continue</button>
         </div>
     </div>
@@ -71,170 +73,178 @@
     
     
     
-        <script>
-    const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-
-let germs = [];
-let score = 0;
-let missed = 0;
-let gameOver = true; // Game initially paused until user clicks "Continue"
-
-// Array of Germ Images
-const germImages = [
-    'images/illustration/germ1.png',
-    'images/illustration/germ2.png',
-    'images/illustration/germ3.png'
-];
-
-// Preload Germ Images
-const loadedImages = germImages.map(src => {
-    const img = new Image();
-    img.src = src;
-    return img;
-});
-
-// Germ Object
-class Germ {
-    constructor(x, y, speed, image) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.image = image;
-        this.size = 60; // Visual size of the germ
-        this.hitbox = this.size + 20; // Expanded clickable area
-    }
-
-    draw() {
-        ctx.drawImage(this.image, this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
-    }
-
-    update() {
-        this.y += this.speed;
-    }
-
-    isClicked(mouseX, mouseY) {
-        return (
-            mouseX >= this.x - this.hitbox / 2 &&
-            mouseX <= this.x + this.hitbox / 2 &&
-            mouseY >= this.y - this.hitbox / 2 &&
-            mouseY <= this.y + this.hitbox / 2
-        );
-    }
-}
-
-// Resize Canvas to Fit Screen
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-// Spawn Germs
-function spawnGerm() {
-    if (gameOver) return; // Do not spawn germs if the game is paused
-    const x = Math.random() * (canvas.width - 80) + 40;
-    const speed = Math.random() * 2 + 1;
-    const randomImage = loadedImages[Math.floor(Math.random() * loadedImages.length)];
-    germs.push(new Germ(x, 0, speed, randomImage));
-}
-
-// Detect Clicks
-canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    for (let i = germs.length - 1; i >= 0; i--) {
-        if (germs[i].isClicked(mouseX, mouseY)) {
-            germs.splice(i, 1); // Remove germ
-            score++;
-            updateScore();
-            if (score === 20) { // Player wins when they collect 8 germs
-                showPopUp('Congratulations! You won the game!', false);
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+    
+        let germs = [];
+        let score = 0;
+        let missed = 0;
+        let gameOver = true; // Game initially paused until user clicks "Continue"
+    
+        // Array of Germ Images
+        const germImages = [
+            'images/illustration/germ1.png',
+            'images/illustration/germ2.png',
+            'images/illustration/germ3.png'
+        ];
+    
+        // Preload Germ Images
+        const loadedImages = germImages.map(src => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        });
+    
+        // Germ Object
+        class Germ {
+            constructor(x, y, speed, image) {
+                this.x = x;
+                this.y = y;
+                this.speed = speed;
+                this.image = image;
+                this.size = 60; // Visual size of the germ
+                this.hitbox = this.size + 80; // Expanded clickable area
             }
-            break;
-        }
-    }
-});
-
-// Update Scoreboard
-function updateScore() {
-    document.getElementById('scoreBoard').innerText = `Score: ${score} | Missed: ${missed}`;
-}
-
-// Show Pop-Up
-function showPopUp(message, isGameOver) {
-    const winPopup = document.getElementById('winPopup');
-    const popupMessage = document.getElementById('popupMessage');
-    const popupButton = document.getElementById('popupButton');
-    const audio = new Audio('images/open.mp3'); // Replace with your sound file path
-
-    popupMessage.innerText = message;
-
-    if (isGameOver) {
-        popupButton.style.display = 'block';
-        popupButton.innerText = 'Try Again';
-        popupButton.onclick = () => location.reload();
-    } else {
-        popupButton.style.display = 'block';
-        popupButton.innerText = 'Go to Next Page';
-        popupButton.onclick = () => window.location.href = 'ip-quiz.html';
-    }
-
-    audio.play();
-    winPopup.classList.remove('invisible');
-    winPopup.classList.add('visible');
-    canvas.classList.add('blurred');
-    gameOver = true; // Stop the game
-}
-
-// Game Loop
-function gameLoop() {
-    if (gameOver) return; // Pause the game loop if the game is over or paused
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw and update germs
-    germs.forEach((germ, index) => {
-        germ.draw();
-        germ.update();
-
-        if (germ.y > canvas.height) {
-            germs.splice(index, 1);
-            missed++;
-            updateScore();
-
-            if (missed >= 5) {
-                showPopUp('Game Over! Try Again.', true);
+    
+            draw() {
+                ctx.drawImage(this.image, this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+            }
+    
+            update() {
+                this.y += this.speed;
+            }
+    
+            isClicked(mouseX, mouseY) {
+                return (
+                    mouseX >= this.x - this.hitbox / 2 &&
+                    mouseX <= this.x + this.hitbox / 2 &&
+                    mouseY >= this.y - this.hitbox / 2 &&
+                    mouseY <= this.y + this.hitbox / 2
+                );
             }
         }
-    });
-
-    requestAnimationFrame(gameLoop);
-}
-
-// Modal Logic
-const modal = document.getElementById('modal');
-const continueButton = document.getElementById('continueButton');
-
-// Start the game on clicking "Continue"
-continueButton.addEventListener('click', () => {
-    modal.style.display = 'none'; // Hide modal
-    gameOver = false; // Resume the game
-    gameLoop(); // Start the game loop
-    setInterval(spawnGerm, 800); // Start spawning germs
-});
-
-// Show modal on page load
-window.onload = () => {
-    modal.style.display = 'flex';
-};
-
-// Resize Canvas on Load and Resize
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-</script>
+    
+        // Resize Canvas to Fit Screen
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    
+        // Spawn Germs
+        function spawnGerm() {
+            if (gameOver) return; // Do not spawn germs if the game is paused
+            const x = Math.random() * (canvas.width - 80) + 40;
+            const speed = Math.random() * 2 + 1;
+            const randomImage = loadedImages[Math.floor(Math.random() * loadedImages.length)];
+            germs.push(new Germ(x, 0, speed, randomImage));
+        }
+    
+        // Detect Clicks and Touch Events
+        function handleInteraction(e) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+    
+            for (let i = germs.length - 1; i >= 0; i--) {
+                if (germs[i].isClicked(mouseX, mouseY)) {
+                    germs.splice(i, 1); // Remove germ
+                    score++;
+                    updateScore();
+                    if (score === 10) { // Player wins when they collect 20 germs
+                        showPopUp('Congratulations! You won the game!', false);
+                    }
+                    break;
+                }
+            }
+        }
+    
+        canvas.addEventListener('click', handleInteraction);
+        canvas.addEventListener('touchstart', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const touchX = e.touches[0].clientX - rect.left;
+            const touchY = e.touches[0].clientY - rect.top;
+            handleInteraction({ clientX: touchX, clientY: touchY });
+        });
+    
+        // Update Scoreboard
+        function updateScore() {
+            document.getElementById('scoreBoard').innerText = `Score: ${score} | Missed: ${missed}`;
+        }
+    
+        // Show Pop-Up
+        function showPopUp(message, isGameOver) {
+            const winPopup = document.getElementById('winPopup');
+            const popupMessage = document.getElementById('popupMessage');
+            const popupButton = document.getElementById('popupButton');
+            const audio = new Audio('images/open.mp3'); // Replace with your sound file path
+    
+            popupMessage.innerText = message;
+    
+            if (isGameOver) {
+                popupButton.style.display = 'block';
+                popupButton.innerText = 'Try Again';
+                popupButton.onclick = () => location.reload();
+            } else {
+                popupButton.style.display = 'block';
+                popupButton.innerText = 'Continue';
+                popupButton.onclick = () => window.location.href = 'quiz.html';
+            }
+    
+            audio.play();
+            winPopup.classList.remove('invisible');
+            winPopup.classList.add('visible');
+            canvas.classList.add('blurred');
+            gameOver = true; // Stop the game
+        }
+    
+        // Game Loop
+        function gameLoop() {
+            if (gameOver) return; // Pause the game loop if the game is over or paused
+    
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+            // Draw and update germs
+            germs.forEach((germ, index) => {
+                germ.draw();
+                germ.update();
+    
+                if (germ.y > canvas.height) {
+                    germs.splice(index, 1);
+                    missed++;
+                    updateScore();
+    
+                    if (missed >= 5) {
+                        showPopUp('Game Over! Try Again.', true);
+                    }
+                }
+            });
+    
+            requestAnimationFrame(gameLoop);
+        }
+    
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const continueButton = document.getElementById('continueButton');
+    
+        // Start the game on clicking "Continue"
+        continueButton.addEventListener('click', () => {
+            modal.style.display = 'none'; // Hide modal
+            gameOver = false; // Resume the game
+            gameLoop(); // Start the game loop
+            setInterval(spawnGerm, 800); // Start spawning germs
+        });
+    
+        // Show modal on page load
+        window.onload = () => {
+            modal.style.display = 'flex';
+        };
+    
+        // Resize Canvas on Load and Resize
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+    
 
         
 </body>

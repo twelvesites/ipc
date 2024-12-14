@@ -1,0 +1,464 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    b {
+      font-weight: 800
+    }
+        
+.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-color: #ffffff93; /* Clean white background */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+      z-index: 1000; /* Ensures it stays above other content */
+      color: #333333; /* Darker text for better readability */
+      position: fixed; /* Sticks the navbar to the top */
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: transform 0.3s ease-in-out;
+    }
+    .navbar img {
+      width: 120px;
+    }
+        
+        .menu {
+          display: flex;
+          gap: 20px;
+        }
+        
+        .menu a {
+          color: #000000;
+          text-decoration: none;
+          font-size: 16px;
+        }
+        body {
+            background-color: #D3CFEC;
+            font-family: "Mulish", sans-serif;
+          }
+
+
+          #intro {
+            position: relative;
+            display: flex;
+            background-color: #F3F3FF;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            text-align: center;
+            margin-top: 55px;
+        }
+        
+        #intro img {
+            width: 100%; /* Adjust the width as needed */
+            height: auto;
+            object-fit: cover;
+        }
+        
+        #intro .content {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgb(0, 0, 0); /* Adjust text color for better visibility */
+            
+        }
+        
+        #intro h1 {
+            margin: 0 0 1rem;
+            font-size: 2.5rem; /* Adjust font size as needed */
+            font-weight: 900;
+        }
+        
+        #intro button {
+            padding: 0.75rem 5.5rem;
+            font-size: 1.5rem;
+            background-color: #D1E4E2; /* Button color */
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #intro button:hover {
+            background-color: #6a918d; /* Darker shade for hover */
+        }
+
+#content h1 {
+      text-align: center;
+      font-weight: 900;
+      font-size: 40px;
+      margin-top: 30px;
+}
+.ipc-content {
+      display: flex;
+      justify-content: space-around;
+}
+.ipc-content img {
+      width: 25%;
+      margin: 70px;
+}
+.ipc-content p {
+      margin: 90px 90px 0 90px;
+      font-size: 20px;
+}
+/* Styling for the container with two boxes */
+#boxes {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px; /* Space between the two boxes */
+      margin: 20px; /* Adjust top and bottom margins */
+  }
+  
+  .box {
+      flex: 1; /* Makes the boxes equal width */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      border: 1px solid #ccc; /* Optional border for visual clarity */
+      border-radius: 60px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+      background-color: #f9f9f9;
+  }
+  
+  .box img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+  }
+  
+  .box p {
+      font-size: 1rem;
+      margin: 10px;
+  }
+  
+  /* Styling for the wide box */
+  #wide-box {
+      margin: 20px; /* Adds more space above and below */
+      padding: 2rem;
+      background-color: #D1E4E2; /* Optional background color */
+      text-align: center;
+      border: 1px solid #ccc; /* Optional border for consistency */
+      border-radius: 60px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #wide-box p {
+      margin: 50px;
+      font-size: 1.2rem;
+     
+  }
+  .wideboxflex img {
+      width: 50%;
+  }
+.wideboxflex {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 10%;
+}
+a button {
+      padding: 15px 80px;
+      font-size: 15px;
+      border-radius: 30px;
+      text-align: left;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    #steps {
+      margin-top: 80px;
+      margin-left: 30px;
+      
+    }
+    #steps h1 {
+      font-size: 40px;
+      margin-bottom: 30px;
+    }
+    #content-steps h2 {
+      font-size: 40px;
+      font-weight: 900;
+      position: absolute;
+      top: -60px;
+      left: 0px;
+      margin: 20px;
+    }
+    #content-steps p {
+      font-size: 20px;
+      margin: 90px 0 0 30px;
+
+    }
+
+    #content-steps img {
+      width: 50%;
+      margin: 0 20%;
+    }
+    #content-steps {
+      max-width: 95%;
+      background-color: #F3F3FF;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      height: 350px;
+      border-radius: 30px;
+      
+    }
+    
+    .step-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    
+    .step-content.visible {
+      opacity: 1;
+      transform: translateX(0);
+      display: flex;
+      justify-content: space-around;
+      margin: 50px;
+    }
+    
+    .step-content.exit {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    #next-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 10px 20px;
+      font-size: 55px;
+      background-color: #7f71d5;
+      color: white;
+      border: none;
+      border-radius: 90px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+/* Pop-Up Styles */
+.win-popup {
+  position: fixed;
+  top: -200px; /* Start above the screen */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #D1E4E2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+  width: 60%;
+  height: auto;
+}
+
+.win-popup.visible {
+  visibility: visible;
+  opacity: 1;
+  top: 30%; /* Move down to the center of the screen */
+}
+
+/* Pop-up Content */
+.win-popup .popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button Style */
+.win-popup .popup-content button {
+  padding: 10px 20px;
+  background-color: #D3CFEC;
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 30px;
+  margin-top: 10px;
+}
+
+.win-popup .popup-content button:hover {
+  background-color: #45a049;
+}
+.popup-content img {
+  width: 100px;
+}
+.popup-content p {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* Blurring the Canvas Container */
+#gameCanvas.blurred {
+  filter: blur(5px);
+  pointer-events: none; /* Disable interaction with the blurred background */
+}
+
+/* Invisible Class for Hidden State */
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Optional styles to make sure the canvas takes full screen */
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  background-color: #F3F3FF;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #FFE6A6;
+  padding: 20px;
+  width: 30%;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.modal-content h1 {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#continueButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #69F0E2;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 30px;
+}
+
+#continueButton:hover {
+  background: #0056b3;
+}
+.modal-content input {
+  width: 70%;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 20px;
+}
+.modal-content h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+.start {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #69F0E2;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 30px;
+}    
+#quizContainer {
+  text-align: center;
+  background-color: #F3F3FF;
+  width: 90%;
+  height: auto;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+#quizContainer h1 {
+  font-size: 20px;
+}
+/* Styling for option buttons */
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  text-align: center;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 5px;
+}
+
+.option-button:hover {
+  background-color: #e0e0e0;
+}
+#questionContainer {
+  font-size: 28px;
+  margin: 30px;
+}
+#certificateName {
+  font-family: 'Allura', cursive;
+  font-size: 50px; /* Adjust size as needed */
+  text-align: center; /* Center the text */
+}
+#resultContainer {
+  text-align: center;
+}
+
+#nextButton {
+  margin-top: 10px;
+}
+
+
+#resultContainer {
+  text-align: center;
+  background-color: #F3F3FF;
+  width: 70%;
+  height: auto;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+#resultContainer h1 {
+  font-size: 25px;
+  margin: 20px;
+  font-weight: 900;
+}
+#resultContainer img {
+  width: 20%;
+}
+
+#resultContainer  button {
+  padding: 10px;
+  width: 80%;
+  font-size: 16px;
+  background: #69F0E2;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 30px;
+}

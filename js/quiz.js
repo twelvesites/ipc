@@ -187,6 +187,7 @@ function showResult() {
     // Enable the download certificate button
     document.getElementById('downloadCertificateButton').style.display = "block";
 }
+
 function capitalizeName(name) {
     return name
         .split(' ')  // Split the name into words
@@ -226,25 +227,40 @@ function downloadCertificate() {
         // Generate the PDF as a Blob
         const pdfBlob = doc.output('blob');
 
-        // Create an Object URL for the Blob
+        // Detect if the device is iOS
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         const link = document.createElement('a');
         link.href = URL.createObjectURL(pdfBlob);
-        link.download = 'certificate.pdf';
+        link.download = 'Twelve-Certificate.pdf';
+        link.rel = 'noopener';
 
-        // Append the link to the document and trigger the download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        if (isIOS) {
+            // Open a new tab for iOS devices
+            link.target = '_blank';
+            link.style.display = 'none'; // Make the link invisible
 
-        // Revoke the Object URL to free memory
-        URL.revokeObjectURL(link.href);
+            document.body.appendChild(link);
+            // Trigger click via a timeout to handle iOS restrictions
+            setTimeout(() => {
+                link.click();
+                document.body.removeChild(link);
+            }, 100);
+        } else {
+            // For non-iOS devices, trigger download normally
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href); // Free up memory
+        }
     };
 
     img.src = 'https://twelvesites.github.io/ipc/images/certificate_template.png'; // Path to your certificate template image
 }
 
+
 // Expose to global scope
 window.downloadCertificate = downloadCertificate;
+
 // Function to get the device information
 function getDeviceInfo() {
     const userAgent = navigator.userAgent;

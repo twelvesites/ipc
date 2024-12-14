@@ -54,7 +54,6 @@ const steps = [
     
       // If it's the last step, set the button to redirect
       if (currentStep === steps.length - 1) {
-        buttonElement.textContent = "Finish";
         buttonElement.addEventListener("click", () => {
           window.location.href = "catch-germs.html"; // Replace with your desired URL
         });
